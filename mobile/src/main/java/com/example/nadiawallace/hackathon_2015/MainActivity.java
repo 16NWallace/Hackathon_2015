@@ -5,10 +5,48 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+import watch.nudge.phonegesturelibrary.AbstractPhoneGestureActivity;
+
+//Class that executes when you build and run the app
+public abstract class MainActivity extends AbstractPhoneGestureActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    public void onSnap() {
+
+    }
+
+    @Override
+    public void onFlick() {
+
+    }
+
+    @Override
+    public void onTwist() {
+
+    }
+
+    @Override
+    public void onTiltX(float v) {
+
+    }
+
+    @Override
+    public void onTilt(float v, float v1, float v2) {
+
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }

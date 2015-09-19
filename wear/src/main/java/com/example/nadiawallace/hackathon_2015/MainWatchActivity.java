@@ -7,10 +7,54 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-public class MainWatchActivity extends WearableActivity {
+import watch.nudge.gesturelibrary.AbstractGestureClientActivity;
+import watch.nudge.gesturelibrary.GestureConstants;
+
+public abstract class MainWatchActivity extends AbstractGestureClientActivity {
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onSnap() {
+
+    }
+
+    @Override
+    public void onFlick() {
+
+    }
+
+    @Override
+    public void onTwist() {
+
+    }
+
+    @Override
+    public void onTiltX(float v) {
+
+    }
+
+    @Override
+    public boolean sendsGestureToPhone() {
+        return false;
+    }
+
+    @Override
+    public ArrayList<GestureConstants.SubscriptionGesture> getGestureSubscpitionList() {
+        return null;
+    }
 
     private static final SimpleDateFormat AMBIENT_DATE_FORMAT =
             new SimpleDateFormat("HH:mm", Locale.US);
