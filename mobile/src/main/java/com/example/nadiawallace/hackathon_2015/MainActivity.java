@@ -1,4 +1,5 @@
 package com.example.nadiawallace.hackathon_2015;
+import android.widget.Toast;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,11 +9,21 @@ import android.view.MenuItem;
 import watch.nudge.phonegesturelibrary.AbstractPhoneGestureActivity;
 
 //Class that executes when you build and run the app
-public abstract class MainActivity extends AbstractPhoneGestureActivity {
+public class MainActivity extends AbstractPhoneGestureActivity {
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onWindowClosed() {
+        Toast.makeText(this,"Gesture window closed.",Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onTwist() {
+        Toast.makeText(this,"Just twist it",Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onSnap() {
+        Toast.makeText(this,"Feeling snappy!",Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -20,20 +31,12 @@ public abstract class MainActivity extends AbstractPhoneGestureActivity {
         super.onStop();
     }
 
-    @Override
-    public void onSnap() {
-
-    }
 
     @Override
     public void onFlick() {
-
+        Toast.makeText(this,"Got a flick!",Toast.LENGTH_LONG).show();
     }
 
-    @Override
-    public void onTwist() {
-
-    }
 
     @Override
     public void onTiltX(float v) {
