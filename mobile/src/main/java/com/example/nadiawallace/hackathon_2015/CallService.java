@@ -1,8 +1,14 @@
 package com.example.nadiawallace.hackathon_2015;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.IBinder;
+import android.text.method.BaseKeyListener;
+import android.text.method.KeyListener;
+import android.view.KeyEvent;
+import android.widget.Button;
 
 import java.util.ArrayList;
 
@@ -26,19 +32,37 @@ public class CallService extends AbstractPhoneGestureService {
     public int onStartCommand(Intent intent, int flags, int startId) {
         contactPresets = intent.getExtras().getParcelable("key");
         fillActionPhoneNumberMap();
+        ButtonKeyEvent bke = new ButtonKeyEvent(this);
+        KeyListener powerButtonListener = new BaseKeyListener() {
+            @Override
+            public int getInputType() {
+                return KeyEvent.KEYCODE_POWER;
+            }
+        };
         return super.onStartCommand(intent, flags, startId);
     }
 
+
     private void fillActionPhoneNumberMap(){
         actionPhoneNumberMap = new HashMap<>();
-        actionPhoneNumberMap.put(PossibleAction.CALL_POLICE, new ArrayList<String>(Arrays.asList("911")));
-        actionPhoneNumberMap.put(PossibleAction.EMERGENCY_CALL, contactPresets.getEmergencyContacts());
         actionPhoneNumberMap.put(PossibleAction.CALL_POLICE, Arrays.asList("555"));
         actionPhoneNumberMap.put(PossibleAction.EMERGENCY_TEXT, contactPresets.getEmergencyContacts());
         actionPhoneNumberMap.put(PossibleAction.PRESENT_TEXT, contactPresets.getPresentContacts());
     }
 
     //Helper functions for Intent passing
+
+
+    private void sendTextMessage(PossibleAction action, String msg) {
+        List<String> numbersToCall = actionPhoneNumberMap.get(action);
+        for (String contact : numbersToCall) {
+            Uri uri = Uri.parse("smsto:" + contact);
+            Intent it = new Intent(Intent.ACTION_SENDTO, uri);
+            it.putExtra("sms_body", DEFAULT_TEXT_MESSAGE);
+            startActivity(it);
+        }
+    }
+
     private void makePhoneCall(PossibleAction action){
         List<String> numbersToCall = actionPhoneNumberMap.get(action);
         for(String phoneNumber: numbersToCall){
@@ -48,12 +72,6 @@ public class CallService extends AbstractPhoneGestureService {
         }
     }
 
-    private void sendTextMessage(PossibleAction action, String msg){
-        List<String> numbersToCall = actionPhoneNumberMap.get(action);
-        for(String contact: numbersToCall){
-            //send text message
-        }
-    }
 
     private void sendLocation(){
         LocationHandler locationHandler = new LocationHandler();
