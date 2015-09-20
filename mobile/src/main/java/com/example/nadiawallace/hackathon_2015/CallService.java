@@ -1,23 +1,59 @@
 package com.example.nadiawallace.hackathon_2015;
 
-import android.app.Service;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.IBinder;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import watch.nudge.phonegesturelibrary.AbstractPhoneGestureService;
 
 public class CallService extends AbstractPhoneGestureService {
-    public CallService() {
-    }
+
+    //ContactPresets extends/implements Parcelable
+    private ContactPresets contactPresets;
+    private Map<PossibleAction, String> actionPhoneNumberMap;
 
     @Override
-    public void onSnap() {
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        contactPresets = intent.getExtras().getParcelable("key");
+        fillActionPhoneNumberMap();
+        return super.onStartCommand(intent, flags, startId);
+    }
 
+    private void fillActionPhoneNumberMap(){
+        actionPhoneNumberMap = new HashMap<>();
+        actionPhoneNumberMap.put(PossibleAction.CALL_POLICE, "911");
+        actionPhoneNumberMap.put(PossibleAction.EMERGENCY_CALL, contactPresets.getEmergencyContacts());
+        actionPhoneNumberMap.put(PossibleAction.EMERGENCY_TEXT, contactPresets.getEmergencyContacts());
+        actionPhoneNumberMap.put(PossibleAction.PRESENT_CALL, contactPresets.getPresentContacts());
+        actionPhoneNumberMap.put(PossibleAction.PRESENT_TEXT, contactPresets.getPresentContacts());
+    }
+
+    //Helper functions for Intent passing
+    private void makePhoneCall(){
+        //Intent callIntent = new Intent(this, Intent.);
+    }
+
+    private void sendTextMessage(){
+
+    }
+
+    private void sendLocation(){
+        //LocationHandler locationHandler = new LocationHandler();
+        //locationHandler.handle();
+    }
+
+    //Callback functions for gestures
+    @Override
+    public void onSnap() {
+        makePhoneCall();
     }
 
     @Override
     public void onFlick() {
-
+        sendTextMessage();
     }
 
     @Override

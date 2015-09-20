@@ -4,6 +4,7 @@
     package="com.example.nadiawallace.hackathon_2015" >
 
     <uses-sdk tools:overrideLibrary="watch.nudge.phonegesturelibrary" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"

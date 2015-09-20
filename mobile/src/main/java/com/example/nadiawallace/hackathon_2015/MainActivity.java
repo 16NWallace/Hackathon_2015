@@ -1,9 +1,13 @@
 package com.example.nadiawallace.hackathon_2015;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Parcel;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.app.IntentService;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.widget.Toast;
 
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +32,8 @@ public class MainActivity extends AbstractPhoneGestureActivity  {
     String emergency_phone_3_number;
 
 
+    private ContactPresets presets;
+
     @Override
     public void onWindowClosed() {
         Toast.makeText(this,"Gesture window closed.",Toast.LENGTH_LONG).show();
@@ -46,7 +52,7 @@ public class MainActivity extends AbstractPhoneGestureActivity  {
     @Override
     public void onStart() {
         super.onStart();
-        startService(new Intent(this,CallService.class));
+
     }
 
     @Override
@@ -93,7 +99,13 @@ public class MainActivity extends AbstractPhoneGestureActivity  {
         });
 
         Intent callServiceIntent = new Intent(this,CallService.class);
-        callServiceIntent.putExtra("presets", ContactPresetsObject);
+        Parcel contactParcel = Parcel.obtain();
+        contactParcel.writeStringArray(new String[]{this.friend_phone_number,
+                this.emergency_phone_1_number,
+                this.emergency_phone_2_number,
+                this.emergency_phone_3_number});
+        ContactPresets userContacts = new ContactPresets(contactParcel);
+        callServiceIntent.putExtra("presets", userContacts);
         startService(callServiceIntent);
     }
 
