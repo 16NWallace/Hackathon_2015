@@ -30,7 +30,6 @@ public class ContactPresets implements Parcelable {
         this.emergencyContacts = null;
         this.presentContacts = null;
     }
-
     @Override
     public int describeContents() {
         return 0;
@@ -42,13 +41,11 @@ public class ContactPresets implements Parcelable {
     }
 
 
-    public String getEmergencyContacts () {
-
-        return "";
+    public List<String> getEmergencyContacts () {
+        return emergencyContacts;
     }
 
-    public String getPresentContacts() {
-
-        return "";
+    public List<String> getPresentContacts() {
+        return presentContacts;
     }
 }
