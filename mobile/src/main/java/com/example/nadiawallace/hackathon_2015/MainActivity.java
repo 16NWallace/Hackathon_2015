@@ -1,5 +1,7 @@
 package com.example.nadiawallace.hackathon_2015;
+import android.app.IntentService;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.widget.Toast;
 
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +13,8 @@ import watch.nudge.phonegesturelibrary.AbstractPhoneGestureActivity;
 
 //Class that executes when you build and run the app
 public class MainActivity extends AbstractPhoneGestureActivity {
+
+    private ContactPresets presets;
 
     @Override
     public void onWindowClosed() {
@@ -30,7 +34,7 @@ public class MainActivity extends AbstractPhoneGestureActivity {
     @Override
     public void onStart() {
         super.onStart();
-        startService(new Intent(this,CallService.class));
+
     }
 
     @Override
