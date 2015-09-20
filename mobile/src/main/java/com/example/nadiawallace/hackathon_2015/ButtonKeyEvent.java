@@ -31,7 +31,7 @@ public class ButtonKeyEvent implements KeyEvent.Callback{
     @Override
     public boolean onKeyMultiple(int keyCode, int count, KeyEvent event) {
         if(count>=MULTIPLE_BUTTON && keyCode == KeyEvent.KEYCODE_POWER) {
-            svc.makePhoneCall();
+            svc.makePhoneCall(PossibleAction.CALL_POLICE);
             return true;
         } else {
             return false;

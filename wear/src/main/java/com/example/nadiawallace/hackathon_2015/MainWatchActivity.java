@@ -86,6 +86,8 @@ public class MainWatchActivity extends AbstractGestureClientActivity {
         setContentView(R.layout.activity_main_watch);
         setAmbientEnabled();
 
+        setSubscribeWindowEvents(true);
+
         mContainerView = (BoxInsetLayout) findViewById(R.id.container);
         mTextView = (TextView) findViewById(R.id.text);
         mClockView = (TextView) findViewById(R.id.clock);
