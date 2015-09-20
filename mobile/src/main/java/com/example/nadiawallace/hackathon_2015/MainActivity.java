@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.IBinder;
+
+import android.content.IntentFilter;
+
 import android.os.Parcel;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -61,6 +64,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
         save_button = (Button) findViewById(R.id.savebutton_id);
         friend_phone_textbox  = (EditText) findViewById(R.id.friendPhone_id);
         emergency_phone_1_textbox = (EditText) findViewById(R.id.emergencyPhone1_id);
@@ -91,12 +96,18 @@ public class MainActivity extends Activity {
                         emergency_phone_1_number,
                         emergency_phone_2_number,
                         emergency_phone_3_number)));
+
                 startService(callServiceIntent);
+
+
 
                 Toast.makeText(ctx,"Got it! You're all set :)",Toast.LENGTH_LONG).show();
 
             }
         });
+
+
+
 
     }
 

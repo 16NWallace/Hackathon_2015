@@ -1,5 +1,6 @@
 package com.example.nadiawallace.hackathon_2015;
 
+import android.content.Context;
 import android.location.Location;
 import android.location.LocationManager;
 
@@ -10,8 +11,20 @@ import android.location.LocationManager;
 public class LocationHandler {
 
     private LocationManager locationManager;
-    String locationProvider = LocationManager.GPS_PROVIDER;
-    Location lastKnownLocation = locationManager.getLastKnownLocation(locationProvider);
+    private Location lastKnownLocation;
+
+    public LocationHandler(Context ctx){
+         locationManager = (LocationManager) ctx.getSystemService(Context.LOCATION_SERVICE);
+        try{
+            lastKnownLocation = locationManager.getLastKnownLocation(locationManager.GPS_PROVIDER);
+        } catch (SecurityException e){
+
+        }
+
+    }
+
+
+
 
     public String getLocationLink() {
         double latitude = lastKnownLocation.getLatitude();
