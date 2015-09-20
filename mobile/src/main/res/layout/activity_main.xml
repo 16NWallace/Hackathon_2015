@@ -13,7 +13,8 @@
         android:id="@+id/textView"
         android:textSize="50dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:typeface="normal" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -62,22 +63,23 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/emergencyPhone2_id"
-        android:layout_below="@+id/emergencyPhone1_id"
-        android:layout_toRightOf="@+id/imageView"
-        android:hint="Emergency Phone 2"
-        android:layout_alignRight="@+id/emergencyPhone1_id"
-        android:layout_alignEnd="@+id/emergencyPhone1_id" />
+        android:inputType="phone"
+        android:ems="10"
+        android:id="@+id/emergencyPhone3_id"
+        android:hint="Emergency Phone 3"
+        android:layout_below="@+id/emergencyPhone2_id"
+        android:layout_alignLeft="@+id/emergencyPhone2_id"
+        android:layout_alignStart="@+id/emergencyPhone2_id" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="phone"
         android:ems="10"
-        android:id="@+id/emergencyPhone3_id"
-        android:layout_below="@+id/emergencyPhone2_id"
-        android:layout_toRightOf="@+id/imageView"
-        android:layout_toEndOf="@+id/imageView"
-        android:hint="Emergency Phone 3" />
+        android:id="@+id/emergencyPhone2_id"
+        android:layout_below="@+id/emergencyPhone1_id"
+        android:layout_alignLeft="@+id/emergencyPhone1_id"
+        android:layout_alignStart="@+id/emergencyPhone1_id"
+        android:hint="Emergency Phone 2" />
 
 </RelativeLayout>

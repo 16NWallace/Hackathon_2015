@@ -2,12 +2,17 @@ package com.example.nadiawallace.hackathon_2015;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Parcel;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.app.IntentService;
 import android.content.Intent;
 import android.os.Parcelable;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import android.support.v7.app.AppCompatActivity;
@@ -91,11 +96,15 @@ public class MainActivity extends AbstractPhoneGestureActivity  {
         save_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 friend_phone_number = friend_phone_textbox.getText().toString();
                 emergency_phone_1_number  = emergency_phone_1_textbox.getText().toString();
                 emergency_phone_2_number  = emergency_phone_2_textbox.getText().toString();
                 emergency_phone_3_number  = emergency_phone_3_textbox.getText().toString();
+
             }
+
+
         });
 
         Intent callServiceIntent = new Intent(this,CallService.class);

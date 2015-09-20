@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.IBinder;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import watch.nudge.phonegesturelibrary.AbstractPhoneGestureService;
@@ -13,7 +16,7 @@ public class CallService extends AbstractPhoneGestureService {
 
     //ContactPresets extends/implements Parcelable
     private ContactPresets contactPresets;
-    private Map<PossibleAction, String> actionPhoneNumberMap;
+    private Map<PossibleAction, List<String>> actionPhoneNumberMap;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -24,7 +27,7 @@ public class CallService extends AbstractPhoneGestureService {
 
     private void fillActionPhoneNumberMap(){
         actionPhoneNumberMap = new HashMap<>();
-        actionPhoneNumberMap.put(PossibleAction.CALL_POLICE, "911");
+        actionPhoneNumberMap.put(PossibleAction.CALL_POLICE, new ArrayList<String>(Arrays.asList("911")));
         actionPhoneNumberMap.put(PossibleAction.EMERGENCY_CALL, contactPresets.getEmergencyContacts());
         actionPhoneNumberMap.put(PossibleAction.EMERGENCY_TEXT, contactPresets.getEmergencyContacts());
         actionPhoneNumberMap.put(PossibleAction.PRESENT_CALL, contactPresets.getPresentContacts());
