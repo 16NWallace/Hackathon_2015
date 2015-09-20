@@ -6,6 +6,5 @@ import android.content.Intent;
  * Created by nadiawallace on 9/19/15.
  */
 public enum PossibleAction {
-    PRESENT_CALL, PRESENT_TEXT, EMERGENCY_CALL, EMERGENCY_TEXT, SEND_LOCATION, CALL_POLICE
-
+    PRESENT_TEXT, EMERGENCY_TEXT, CALL_POLICE
 }

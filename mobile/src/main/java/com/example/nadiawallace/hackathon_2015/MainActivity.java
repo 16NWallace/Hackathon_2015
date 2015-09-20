@@ -41,18 +41,20 @@ public class MainActivity extends AbstractPhoneGestureActivity  {
 
     @Override
     public void onTwist() {
-        Toast.makeText(this,"Just twist it",Toast.LENGTH_LONG).show();
+        //Toast.makeText(this,"Just twist it",Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onSnap() {
-        Toast.makeText(this,"Feeling snappy!",Toast.LENGTH_LONG).show();
+        //Toast.makeText(this,"Feeling snappy!",Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onStart() {
         super.onStart();
-
+        Intent callServiceIntent = new Intent(this,CallService.class);
+        callServiceIntent.putExtra("presets", presets);
+        startService(callServiceIntent);
     }
 
     @Override

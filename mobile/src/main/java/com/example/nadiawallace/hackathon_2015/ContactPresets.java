@@ -3,6 +3,7 @@ package com.example.nadiawallace.hackathon_2015;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,6 +13,7 @@ public class ContactPresets implements Parcelable {
 
     private final List<String> emergencyContacts;
     private final List<String> presentContacts;
+    private final String[] allContacts;
 
     public static final Parcelable.Creator<ContactPresets> CREATOR = new Parcelable.Creator<ContactPresets>() {
 
@@ -27,10 +29,17 @@ public class ContactPresets implements Parcelable {
     };
 
     public ContactPresets(Parcel source){
-        this.emergencyContacts = null;
-        this.presentContacts = null;
-    }
+        allContacts = source.createStringArray();
+        emergencyContacts = new ArrayList<>();
+        presentContacts = new ArrayList<>();
 
+        presentContacts.add(allContacts[0]);
+
+        emergencyContacts.add(allContacts[1]);
+        emergencyContacts.add(allContacts[2]);
+        emergencyContacts.add(allContacts[3]);
+
+    }
     @Override
     public int describeContents() {
         return 0;
@@ -43,12 +52,10 @@ public class ContactPresets implements Parcelable {
 
 
     public List<String> getEmergencyContacts () {
-
         return emergencyContacts;
     }
 
     public List<String> getPresentContacts() {
-
         return presentContacts;
     }
 }
