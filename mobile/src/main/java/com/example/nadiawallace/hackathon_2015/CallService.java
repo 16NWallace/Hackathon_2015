@@ -3,6 +3,7 @@ package com.example.nadiawallace.hackathon_2015;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.IBinder;
 import android.text.method.BaseKeyListener;
@@ -25,17 +26,24 @@ public class CallService extends AbstractPhoneGestureService {
     private static final String DEFAULT_TEXT_MESSAGE = "I use WristWatch. This an automated message" +
             "that I have signaled the app that I am uncomfortable and would like help";
 
+    private BroadcastReceiver powerButtonReceiver= new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(Intent.EXTRA_KEY_EVENT)) {
+                int eventCode = intent.getIntExtra(Intent.EXTRA_KEY_EVENT, 0);
+                if(eventCode == KeyEvent.KEYCODE_POWER){
+                    makePhoneCall(PossibleAction.CALL_POLICE);
+                }
+            }
+        }
+    };
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         contactPresets = intent.getExtras().getParcelable("key");
         fillActionPhoneNumberMap();
-        ButtonKeyEvent bke = new ButtonKeyEvent(this);
-        KeyListener powerButtonListener = new BaseKeyListener() {
-            @Override
-            public int getInputType() {
-                return KeyEvent.KEYCODE_POWER;
-            }
-        };
+        IntentFilter filter = new IntentFilter(Intent.EXTRA_KEY_EVENT);
+        registerReceiver(powerButtonReceiver, filter);
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -61,11 +69,11 @@ public class CallService extends AbstractPhoneGestureService {
         }
     }
 
-    private void makePhoneCall(PossibleAction action){
+    protected void makePhoneCall(PossibleAction action){
         List<String> numbersToCall = actionPhoneNumberMap.get(action);
         for(String phoneNumber: numbersToCall){
             Intent callIntent = new Intent(Intent.ACTION_CALL);
-            callIntent.setData(Uri.parse("tel: "+phoneNumber));
+            callIntent.setData(Uri.parse("tel: " + phoneNumber));
             startActivity(callIntent);
         }
     }

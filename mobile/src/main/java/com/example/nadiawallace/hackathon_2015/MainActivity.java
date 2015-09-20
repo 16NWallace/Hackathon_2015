@@ -1,6 +1,7 @@
 package com.example.nadiawallace.hackathon_2015;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Parcel;
 import android.view.View;
 import android.widget.Button;
@@ -94,9 +95,9 @@ public class MainActivity extends AbstractPhoneGestureActivity  {
             @Override
             public void onClick(View v) {
                 friend_phone_number = friend_phone_textbox.getText().toString();
-                emergency_phone_1_number  = emergency_phone_1_textbox.getText().toString();
-                emergency_phone_2_number  = emergency_phone_2_textbox.getText().toString();
-                emergency_phone_3_number  = emergency_phone_3_textbox.getText().toString();
+                emergency_phone_1_number = emergency_phone_1_textbox.getText().toString();
+                emergency_phone_2_number = emergency_phone_2_textbox.getText().toString();
+                emergency_phone_3_number = emergency_phone_3_textbox.getText().toString();
             }
         });
 
@@ -109,6 +110,10 @@ public class MainActivity extends AbstractPhoneGestureActivity  {
         ContactPresets userContacts = new ContactPresets(contactParcel);
         callServiceIntent.putExtra("presets", userContacts);
         startService(callServiceIntent);
+
+        IntentFilter filter = new IntentFilter(Intent.EXTRA_KEY_EVENT);
+        PowerButtonReceiver powerButtonReceiver = new PowerButtonReceiver();
+        registerReceiver(powerButtonReceiver, filter);
     }
 
     @Override

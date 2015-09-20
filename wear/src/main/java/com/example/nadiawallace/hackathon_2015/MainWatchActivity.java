@@ -51,6 +51,8 @@ public class MainWatchActivity extends AbstractGestureClientActivity {
 
     }
 
+
+
     @Override
     public void onGestureWindowClosed() {
 
