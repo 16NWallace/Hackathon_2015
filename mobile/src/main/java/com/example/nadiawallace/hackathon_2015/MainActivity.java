@@ -1,5 +1,9 @@
 package com.example.nadiawallace.hackathon_2015;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import android.support.v7.app.AppCompatActivity;
@@ -10,7 +14,19 @@ import android.view.MenuItem;
 import watch.nudge.phonegesturelibrary.AbstractPhoneGestureActivity;
 
 //Class that executes when you build and run the app
-public class MainActivity extends AbstractPhoneGestureActivity {
+public class MainActivity extends AbstractPhoneGestureActivity  {
+
+
+    Button save_button;
+    EditText friend_phone_textbox;
+    String friend_phone_number;
+    EditText emergency_phone_1_textbox;
+    String emergency_phone_1_number;
+    EditText emergency_phone_2_textbox;
+    String emergency_phone_2_number;
+    EditText emergency_phone_3_textbox;
+    String emergency_phone_3_number;
+
 
     @Override
     public void onWindowClosed() {
@@ -59,6 +75,26 @@ public class MainActivity extends AbstractPhoneGestureActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        save_button = (Button) findViewById(R.id.savebutton_id);
+        friend_phone_textbox  = (EditText) findViewById(R.id.friendPhone_id);
+        emergency_phone_1_textbox = (EditText) findViewById(R.id.emergencyPhone1_id);
+        emergency_phone_2_textbox = (EditText) findViewById(R.id.emergencyPhone3_id);
+        emergency_phone_3_textbox = (EditText) findViewById(R.id.emergencyPhone3_id);
+
+        save_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                friend_phone_number = friend_phone_textbox.getText().toString();
+                emergency_phone_1_number  = emergency_phone_1_textbox.getText().toString();
+                emergency_phone_2_number  = emergency_phone_2_textbox.getText().toString();
+                emergency_phone_3_number  = emergency_phone_3_textbox.getText().toString();
+            }
+        });
+
+        Intent callServiceIntent = new Intent(this,CallService.class);
+        callServiceIntent.putExtra("presets", ContactPresetsObject);
+        startService(callServiceIntent);
     }
 
     @Override
