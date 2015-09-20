@@ -40,7 +40,6 @@ public class ContactPresets implements Parcelable {
         emergencyContacts.add(allContacts[3]);
 
     }
-
     @Override
     public int describeContents() {
         return 0;
@@ -53,12 +52,10 @@ public class ContactPresets implements Parcelable {
 
 
     public List<String> getEmergencyContacts () {
-
         return emergencyContacts;
     }
 
     public List<String> getPresentContacts() {
-
         return presentContacts;
     }
 }
