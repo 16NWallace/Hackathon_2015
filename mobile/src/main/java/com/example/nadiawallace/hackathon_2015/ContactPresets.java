@@ -42,13 +42,13 @@ public class ContactPresets implements Parcelable {
     }
 
 
-    public String getEmergencyContacts () {
+    public List<String> getEmergencyContacts () {
 
-        return "";
+        return emergencyContacts;
     }
 
-    public String getPresentContacts() {
+    public List<String> getPresentContacts() {
 
-        return "";
+        return presentContacts;
     }
 }
